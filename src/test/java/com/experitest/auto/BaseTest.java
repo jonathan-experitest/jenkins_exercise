@@ -18,17 +18,10 @@ public class BaseTest {
 		dc.setCapability("deviceQuery", adhocDevice(deviceQuery));
 		dc.setCapability("reportDirectory", "reports");
 		dc.setCapability("reportFormat", "xml");
+		dc.setCapability("stream", "jenkins_exercise");
+		dc.setCapability("build.number", System.getenv("BUILD_NUMBER"));
 		String accessKey = getProperty("accessKey", cloudProperties);
-		if(accessKey != null && !accessKey.isEmpty()){
-			dc.setCapability("accessKey", getProperty("accessKey", cloudProperties));
-		} else {
-			dc.setCapability("user", getProperty("username", cloudProperties));
-			dc.setCapability("password", getProperty("password", cloudProperties));		}
-		
-		// In case your user is assign to a single project leave empty,
-		// otherwise please specify the project name
-		dc.setCapability("project", getProperty("project", cloudProperties));
-
+		dc.setCapability("accessKey", getProperty("accessKey", cloudProperties));
 	}
 
 	protected String getProperty(String property, Properties props) throws FileNotFoundException, IOException {
@@ -43,9 +36,16 @@ public class BaseTest {
 	}
 
 	private void initCloudProperties() throws FileNotFoundException, IOException {
-		FileReader fr = new FileReader("cloud.properties");
-		cloudProperties.load(fr);
-		fr.close();
+		File cloud_properties = new File("cloud.properties");
+		if(cloud_properties.exists()) {
+			FileReader fr = new FileReader("cloud.properties");
+			cloudProperties.load(fr);
+			fr.close();
+		}
+		else {
+			cloudProperties.setProperty("url", System.getenv("url"));
+			cloudProperties.setProperty("accessKey", System.getenv("accessKey"));
+		}
 	}
 
 	private static synchronized String adhocDevice(String deviceQuery) {
