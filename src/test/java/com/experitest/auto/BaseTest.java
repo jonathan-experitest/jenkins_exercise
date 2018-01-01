@@ -20,7 +20,6 @@ public class BaseTest {
 		dc.setCapability("reportFormat", "xml");
 		dc.setCapability("stream", "jenkins_exercise");
 		dc.setCapability("build.number", System.getenv("BUILD_NUMBER"));
-		String accessKey = getProperty("accessKey", cloudProperties);
 		dc.setCapability("accessKey", getProperty("accessKey", cloudProperties));
 	}
 
