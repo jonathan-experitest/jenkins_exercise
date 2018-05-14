@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.experitest.auto.IOSDemoTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-01-01T09:51:44" hostname="jaharon-lt" time="0.001">
+  <properties/>
+  <testcase name="test" classname="com.experitest.auto.IOSDemoTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
